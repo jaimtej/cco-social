@@ -29,8 +29,9 @@ h1{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.05;ma
 .next{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:5px 9px;border:1px solid var(--green);color:var(--green)}
 .card .undo{display:none;font:inherit;font-size:14px;background:none;border:0;color:var(--muted);text-decoration:underline;padding:0;margin-top:4px;cursor:pointer}
 .card.done .undo{display:inline}
-.music{background:var(--card);border:1px solid var(--rule);padding:16px 18px;margin-bottom:20px}
-.music h3{font-family:var(--display);font-size:22px;font-weight:600;margin:0 0 6px}
+.music{background:var(--card);border:1px solid var(--rule);padding:12px 16px;margin-bottom:16px}
+.music summary{font-family:var(--display);font-size:20px;font-weight:600;cursor:pointer}
+.music[open] summary{margin-bottom:8px}
 .music p{margin:0 0 8px;font-size:15px}
 .music ul{margin:0;padding-left:18px;font-size:15px}
 .music li{margin-bottom:4px}
@@ -69,8 +70,8 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
     <li>Check <b>Posted</b> when it's live.</li>
   </ol>
 </header>
-<section class="music">
-  <h3>Recommended music</h3>
+<details class="music">
+  <summary>Recommended music</summary>
   <p>Any song you like works. A few pointers that fit our look:</p>
   <ul>
     <li><b>Keep it calm and polished.</b> Soft piano, acoustic guitar or mellow instrumentals match the brand better than loud trending songs.</li>
@@ -79,7 +80,7 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
     <li><b>Instrumental beats lyrics</b> when there's text on screen, so people can read it.</li>
     <li>Keep the volume low enough that it doesn't feel like an ad.</li>
   </ul>
-</section>
+</details>
 <main><div id="list"></div><div id="donewrap" hidden><div class="donehead">Posted</div><div id="donelist"></div></div></main>
 <footer>Questions? Text Jaime. Checkmarks are saved on this phone only.</footer>
 </div>
