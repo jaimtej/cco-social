@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>C&amp;Co. Posting List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F6F3EC; --card:#FFFDF8; --ink:#20231F; --muted:#5C5A52; --rule:#DDD6C6; --green:#1F3F38; --cream:#F6F3EC;
+  --display:"Cormorant Garamond",Georgia,serif; --body:"Jost","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:640px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right)) 64px max(16px,env(safe-area-inset-left))}
+header{padding-bottom:18px;border-bottom:1px solid var(--rule);margin-bottom:20px}
+.eyebrow{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.05;margin:6px 0 10px}
+.how{margin:0;padding-left:20px;color:var(--muted)}
+.how li{margin-bottom:4px}
+.card{background:var(--card);border:1px solid var(--rule);padding:18px;margin-bottom:16px}
+.card.done{opacity:.55}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.when{font-family:var(--display);font-size:22px;font-weight:600}
+.type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:5px 9px;background:var(--green);color:var(--cream)}
+h2{font-family:var(--display);font-size:26px;font-weight:600;line-height:1.15;margin:4px 0 12px}
+.thumbs{display:flex;gap:6px;overflow-x:auto;margin-bottom:12px;padding-bottom:4px}
+.thumbs img{height:120px;width:auto;flex:0 0 auto;border:1px solid var(--rule)}
+.btn{display:block;width:100%;font:inherit;font-weight:500;font-size:16px;letter-spacing:.04em;padding:14px;border:0;background:var(--green);color:var(--cream);cursor:pointer;text-align:center;text-decoration:none}
+.btn.light{background:transparent;color:var(--ink);border:1px solid var(--rule);margin-top:8px}
+.files{font-size:14px;color:var(--muted);margin:8px 0 0}
+.files a{color:var(--ink)}
+.tips{margin:14px 0 0;padding:12px 14px;background:var(--bg);font-size:14px}
+.tips b{font-weight:500}
+.tips ul{margin:6px 0 0;padding-left:18px}
+.caplabel{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:16px 0 6px}
+.caption{white-space:pre-wrap;font-size:14px;line-height:1.55;margin:0 0 10px;border-left:2px solid var(--green);padding-left:12px;overflow-wrap:anywhere}
+.check{display:flex;gap:10px;align-items:center;margin-top:14px;font-size:15px}
+.check input{width:22px;height:22px;accent-color:var(--green)}
+.status{font-size:13px;color:var(--muted);margin-top:6px;min-height:1em}
+footer{color:var(--muted);font-size:13px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="eyebrow">Carrie &amp; Co. | Keller Williams</div>
+  <h1>Your posting list</h1>
+  <ol class="how">
+    <li>Tap <b>Save to Photos</b>, then choose "Save Images" or "Save Video."</li>
+    <li>Tap <b>Copy caption</b>.</li>
+    <li>Post on @carrieandcojax at the suggested time. Pick any song you like.</li>
+    <li>Check <b>Posted</b> when it's live.</li>
+  </ol>
+</header>
+<main id="list"></main>
+<footer>Questions? Text Jaime. Checkmarks are saved on this phone only.</footer>
+</div>
+<script>
+const RAW='https://raw.githubusercontent.com/jaimtej/cco-social/main/';
+const POSTS=[
+{id:'tax',when:'Fri Oct 30 · 11:30 AM',type:'Carousel · 5 photos',title:'Property taxes jump after you buy',
+ files:[1,2,3,4,5].map(n=>'posts/2026-10/tax-'+n+'.png'),
+ tips:['Add the photos in order, 1 to 5','No music needed'],
+ cap:`Bought a home this year? Your property tax bill might surprise you.
+
+In Florida, the seller's taxes were capped. When a home sells, that cap resets and the home is reassessed at market value the next January 1. That's why your bill can be much higher than the seller's was.
+
+The fix: file for homestead as soon as you move in. It can take up to $50,000 off your taxable value and starts your own cap. The deadline is March 1.
+
+A News4JAX investigation found more than 24,000 Duval homeowners who qualify but never filed. Have you?
+
+Save this, and send it to anyone who just bought.
+
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleRealEstate #HomesteadExemption #PropertyTaxes #DuvalCounty #FirstTimeHomeBuyer`},
+{id:'halloween',when:'Sat Oct 31 · 10:00 AM',type:'Story · 3 frames',title:'The scariest words in real estate',
+ files:[1,2,3].map(n=>'stories/2026-10/halloween-story-'+n+'.png'),
+ tips:['Post as Stories, in order 1, 2, 3','No caption. Music is optional'],cap:''},
+{id:'pay',when:'Sun Nov 1 · 7:00 PM',type:'Carousel · 5 photos',title:"Who's actually paying these prices?",
+ files:[1,2,3,4,5].map(n=>'posts/2026-11/pay-'+n+'.png'),
+ tips:['Add the photos in order, 1 to 5','If the Week One Offer Reel is not going up Monday, delete the "Tomorrow" line'],
+ cap:`Who's actually paying these Jacksonville prices? Honestly? Often nobody.
+
+A lot of homes are still listed like it's 2021. Sellers remember those prices. Buyers are living with today's rates. So overpriced homes sit, and then they get reduced.
+
+Buying? Look at what homes actually sold for, not what they're listed for.
+Selling? The first two weeks matter most. Price it right on day one.
+
+Tomorrow we're sharing a real story about exactly this. 👀
+
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleRealEstate #JaxRealEstate #HousingMarket #HomeSellerTips #HomeBuyerTips`},
+{id:'week1',when:'Mon Nov 2 · 9:00 AM',type:'Reel',title:'Week One Offer: a seller story',
+ files:['ready/week-one-offer/cco-week-one-offer-reel.mp4','ready/week-one-offer/cco-week-one-offer-cover.png'],
+ tips:['Post as a Reel and pick your song','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (the clips are AI made)'],
+ cap:`Week one: an offer. Day 80: about the same price.
+
+This seller did a beautiful renovation. When you've put that much into a home, it's natural to want the price to reflect it. But buyers don't pay for what went into a home. They pay what the market says it's worth.
+
+A great home priced above the market doesn't get a premium. It just gets skipped.
+
+The market sets the price. Experience knows it on day one.
+
+Thinking about selling? Let's price it right the first time.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #RealEstateAdvice`},
+{id:'acosta',when:'Thu Nov 5 · 8:35 AM',type:'Reel',title:'1140 Acosta St: new construction in Riverside',
+ files:['ready/acosta/cco-acosta-reel.mp4','ready/acosta/cco-acosta-cover-carrie.png'],
+ tips:['Post as a Reel and pick your song','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (the clips are AI made)','Tag Palm and Pine Custom Homes'],
+ cap:`New construction in Riverside almost never happens. 🌳
+
+1140 Acosta St is a brand-new home by Palm and Pine Custom Homes, on an oak-lined street minutes from Five Points.
+
+4 bedrooms, a bonus room, and an owner's suite on the main floor. Tall ceilings, a 32-ft back porch, and a 2-car garage. Estimated completion is Q2 2027.
+
+Homes like this in Riverside don't come along often. Request the plans and full specifications before it's gone.
+
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#RiversideJax #JacksonvilleRealEstate #NewConstruction #HistoricRiverside #FivePoints #JaxHomes`}
+];
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const name=p=>p.split('/').pop();
+const isVid=p=>/\.mp4$/.test(p);
+function load(){try{return JSON.parse(localStorage.getItem('cco-posted')||'{}')}catch(e){return {}}}
+function save(o){try{localStorage.setItem('cco-posted',JSON.stringify(o))}catch(e){}}
+const state=load(), list=document.getElementById('list');
+POSTS.forEach(p=>{
+  const c=document.createElement('section'); c.className='card'+(state[p.id]?' done':'');
+  const imgs=p.files.filter(f=>!isVid(f));
+  c.innerHTML=`<div class="top"><span class="when">${esc(p.when)}</span><span class="type">${esc(p.type)}</span></div>
+  <h2>${esc(p.title)}</h2>
+  ${imgs.length?`<div class="thumbs">${imgs.map(f=>`<img src="${RAW+f}" alt="${esc(name(f))}" loading="lazy">`).join('')}</div>`:''}
+  <button class="btn save" type="button">Save to Photos</button>
+  <div class="status"></div>
+  <p class="files">Or open one at a time: ${p.files.map(f=>`<a href="${RAW+f}" target="_blank" rel="noopener">${esc(name(f))}</a>`).join(' · ')}</p>
+  <div class="tips"><b>Before you post</b><ul>${p.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
+  ${p.cap?`<div class="caplabel">Caption</div><p class="caption">${esc(p.cap)}</p><button class="btn light copy" type="button">Copy caption</button>`:''}
+  <label class="check"><input type="checkbox" ${state[p.id]?'checked':''}> Posted</label>`;
+  const st=c.querySelector('.status');
+  c.querySelector('.save').addEventListener('click',async e=>{
+    const b=e.currentTarget; b.disabled=true; st.textContent='Getting files ready…';
+    try{
+      const files=await Promise.all(p.files.map(async f=>{const r=await fetch(RAW+f);const bl=await r.blob();return new File([bl],name(f),{type:isVid(f)?'video/mp4':'image/png'})}));
+      if(navigator.canShare&&navigator.canShare({files})){st.textContent='';await navigator.share({files});}
+      else{files.forEach(fl=>{const a=document.createElement('a');a.href=URL.createObjectURL(fl);a.download=fl.name;document.body.appendChild(a);a.click();a.remove()});st.textContent='Downloaded. Check your Downloads folder.';}
+    }catch(err){ if(err&&err.name==='AbortError'){st.textContent='';} else {st.textContent='That didn\'t work. Use the links below to open each file, then save it.';} }
+    b.disabled=false;
+  });
+  const cp=c.querySelector('.copy');
+  if(cp)cp.addEventListener('click',()=>{
+    const done=()=>{cp.textContent='Copied ✓';setTimeout(()=>cp.textContent='Copy caption',1800)};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(c.querySelector('.caption'));const s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Selected. Tap Copy.'};
+    navigator.clipboard?navigator.clipboard.writeText(p.cap).then(done,fallback):fallback();
+  });
+  c.querySelector('input').addEventListener('change',e=>{state[p.id]=e.target.checked;save(state);c.classList.toggle('done',e.target.checked)});
+  list.appendChild(c);
+});
+</script>
+</body>
+</html>
