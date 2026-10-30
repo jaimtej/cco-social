@@ -22,7 +22,15 @@ h1{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.05;ma
 .how{margin:0;padding-left:20px;color:var(--muted)}
 .how li{margin-bottom:4px}
 .card{background:var(--card);border:1px solid var(--rule);padding:18px;margin-bottom:16px}
-.card.done{opacity:.55}
+.card.done{padding:12px 16px;opacity:.7}
+.card.done .body{display:none}
+.card.done h2{font-size:20px;margin:0}
+.card.done .top{margin-bottom:2px}
+.next{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:5px 9px;border:1px solid var(--green);color:var(--green)}
+.card .undo{display:none;font:inherit;font-size:14px;background:none;border:0;color:var(--muted);text-decoration:underline;padding:0;margin-top:4px;cursor:pointer}
+.card.done .undo{display:inline}
+.donehead{font-family:var(--display);font-size:22px;font-weight:600;margin:28px 0 10px;color:var(--muted)}
+.alldone{background:var(--card);border:1px solid var(--rule);padding:18px;font-family:var(--display);font-size:22px}
 .top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
 .when{font-family:var(--display);font-size:22px;font-weight:600}
 .type{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:5px 9px;background:var(--green);color:var(--cream)}
@@ -56,7 +64,7 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
     <li>Check <b>Posted</b> when it's live.</li>
   </ol>
 </header>
-<main id="list"></main>
+<main><div id="list"></div><div id="donewrap" hidden><div class="donehead">Posted</div><div id="donelist"></div></div></main>
 <footer>Questions? Text Jaime. Checkmarks are saved on this phone only.</footer>
 </div>
 <script>
@@ -135,19 +143,23 @@ const name=p=>p.split('/').pop();
 const isVid=p=>/\.mp4$/.test(p);
 function load(){try{return JSON.parse(localStorage.getItem('cco-posted')||'{}')}catch(e){return {}}}
 function save(o){try{localStorage.setItem('cco-posted',JSON.stringify(o))}catch(e){}}
-const state=load(), list=document.getElementById('list');
+const state=load(), list=document.getElementById('list'), donelist=document.getElementById('donelist'), donewrap=document.getElementById('donewrap');
+const cards={};
 POSTS.forEach(p=>{
-  const c=document.createElement('section'); c.className='card'+(state[p.id]?' done':'');
+  const c=document.createElement('section'); c.className='card';
   const imgs=p.files.filter(f=>!isVid(f));
-  c.innerHTML=`<div class="top"><span class="when">${esc(p.when)}</span><span class="type">${esc(p.type)}</span></div>
+  c.innerHTML=`<div class="top"><span class="when">${esc(p.when)}</span><span class="type">${esc(p.type)}</span><span class="next" hidden>Up next</span></div>
   <h2>${esc(p.title)}</h2>
+  <button class="undo" type="button">Posted ✓ · Undo</button>
+  <div class="body">
   ${imgs.length?`<div class="thumbs">${imgs.map(f=>`<img src="${RAW+f}" alt="${esc(name(f))}" loading="lazy">`).join('')}</div>`:''}
   <button class="btn save" type="button">Save to Photos</button>
   <div class="status"></div>
   <p class="files">Or open one at a time: ${p.files.map(f=>`<a href="${RAW+f}" target="_blank" rel="noopener">${esc(name(f))}</a>`).join(' · ')}</p>
   <div class="tips"><b>Before you post</b><ul>${p.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
   ${p.cap?`<div class="caplabel">Caption</div><p class="caption">${esc(p.cap)}</p><button class="btn light copy" type="button">Copy caption</button>`:''}
-  <label class="check"><input type="checkbox" ${state[p.id]?'checked':''}> Posted</label>`;
+  <label class="check"><input type="checkbox"> Posted</label>
+  </div>`;
   const st=c.querySelector('.status');
   c.querySelector('.save').addEventListener('click',async e=>{
     const b=e.currentTarget; b.disabled=true; st.textContent='Getting files ready…';
@@ -155,7 +167,7 @@ POSTS.forEach(p=>{
       const files=await Promise.all(p.files.map(async f=>{const r=await fetch(RAW+f);const bl=await r.blob();return new File([bl],name(f),{type:isVid(f)?'video/mp4':'image/png'})}));
       if(navigator.canShare&&navigator.canShare({files})){st.textContent='';await navigator.share({files});}
       else{files.forEach(fl=>{const a=document.createElement('a');a.href=URL.createObjectURL(fl);a.download=fl.name;document.body.appendChild(a);a.click();a.remove()});st.textContent='Downloaded. Check your Downloads folder.';}
-    }catch(err){ if(err&&err.name==='AbortError'){st.textContent='';} else {st.textContent='That didn\'t work. Use the links below to open each file, then save it.';} }
+    }catch(err){ if(err&&err.name==='AbortError'){st.textContent='';} else {st.textContent="That didn't work. Use the links below to open each file, then save it.";} }
     b.disabled=false;
   });
   const cp=c.querySelector('.copy');
@@ -164,9 +176,19 @@ POSTS.forEach(p=>{
     const fallback=()=>{const r=document.createRange();r.selectNodeContents(c.querySelector('.caption'));const s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Selected. Tap Copy.'};
     navigator.clipboard?navigator.clipboard.writeText(p.cap).then(done,fallback):fallback();
   });
-  c.querySelector('input').addEventListener('change',e=>{state[p.id]=e.target.checked;save(state);c.classList.toggle('done',e.target.checked)});
-  list.appendChild(c);
+  c.querySelector('input').addEventListener('change',e=>{state[p.id]=e.target.checked;save(state);render();if(e.target.checked)window.scrollTo({top:0,behavior:'smooth'})});
+  c.querySelector('.undo').addEventListener('click',()=>{state[p.id]=false;save(state);c.querySelector('input').checked=false;render()});
+  cards[p.id]=c;
 });
+function render(){
+  list.innerHTML='';donelist.innerHTML='';let first=true,any=false;
+  POSTS.forEach(p=>{const c=cards[p.id],d=!!state[p.id];c.classList.toggle('done',d);c.querySelector('input').checked=d;
+    c.querySelector('.next').hidden=!(first&&!d);
+    if(d){donelist.appendChild(c);any=true}else{list.appendChild(c);first=false}});
+  if(!list.children.length){const a=document.createElement('div');a.className='alldone';a.textContent="All caught up. Nothing left to post right now.";list.appendChild(a)}
+  donewrap.hidden=!any;
+}
+render();
 </script>
 </body>
 </html>
