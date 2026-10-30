@@ -67,7 +67,7 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
     <li>Tap <b>Save to Photos</b>, then choose "Save Images" or "Save Video."</li>
     <li>Tap <b>Copy caption</b>.</li>
     <li>Post on @carrieandcojax at the suggested time. Pick any song you like.</li>
-    <li>Check <b>Posted</b> when it's live.</li>
+    <li>Check <b>Posted / Scheduled</b> once it's live or scheduled in Instagram.</li>
   </ol>
 </header>
 <details class="music">
@@ -81,7 +81,7 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
     <li>Keep the volume low enough that it doesn't feel like an ad.</li>
   </ul>
 </details>
-<main><div id="list"></div><div id="donewrap" hidden><div class="donehead">Posted</div><div id="donelist"></div></div></main>
+<main><div id="list"></div><div id="donewrap" hidden><div class="donehead">Posted / Scheduled</div><div id="donelist"></div></div></main>
 <footer>Questions? Text Jaime. Checkmarks are saved on this phone only.</footer>
 </div>
 <script>
@@ -167,7 +167,7 @@ POSTS.forEach(p=>{
   const imgs=p.files.filter(f=>!isVid(f));
   c.innerHTML=`<div class="top"><span class="when">${esc(p.when)}</span><span class="type">${esc(p.type)}</span><span class="next" hidden>Up next</span></div>
   <h2>${esc(p.title)}</h2>
-  <button class="undo" type="button">Posted ✓ · Undo</button>
+  <button class="undo" type="button">Done ✓ · Undo</button>
   <div class="body">
   ${imgs.length?`<div class="thumbs">${imgs.map(f=>`<img src="${RAW+f}" alt="${esc(name(f))}" loading="lazy">`).join('')}</div>`:''}
   <button class="btn save" type="button">Save to Photos</button>
@@ -175,7 +175,7 @@ POSTS.forEach(p=>{
   <p class="files">Or open one at a time: ${p.files.map(f=>`<a href="${RAW+f}" target="_blank" rel="noopener">${esc(name(f))}</a>`).join(' · ')}</p>
   <div class="tips"><b>Before you post</b><ul>${p.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>
   ${p.cap?`<div class="caplabel">Caption</div><p class="caption">${esc(p.cap)}</p><button class="btn light copy" type="button">Copy caption</button>`:''}
-  <label class="check"><input type="checkbox"> Posted</label>
+  <label class="check"><input type="checkbox"> Posted / Scheduled</label>
   </div>`;
   const st=c.querySelector('.status');
   c.querySelector('.save').addEventListener('click',async e=>{
