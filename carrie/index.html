@@ -82,7 +82,7 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
   </ul>
 </details>
 <main><div id="list"></div><div id="donewrap" hidden><div class="donehead">Posted / Scheduled</div><div id="donelist"></div></div></main>
-<footer>Questions? Text Jaime. Checkmarks are saved on this phone only.</footer>
+<footer>Questions? Text Jaime. Posts move to Posted / Scheduled automatically after their day passes. Checkmarks are saved on this phone only.</footer>
 </div>
 <script>
 const RAW='https://raw.githubusercontent.com/jaimtej/cco-social/main/';
@@ -288,9 +288,11 @@ POSTS.forEach(p=>{
   c.querySelector('.undo').addEventListener('click',()=>{state[p.id]=false;save(state);c.querySelector('input').checked=false;render()});
   cards[p.id]=c;
 });
+const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+function isPast(p){const m=/([A-Z][a-z]{2}) (\d{1,2})/.exec(p.when.replace(/^[A-Z][a-z]{2} /,''));if(!m||!(m[1] in MON))return false;const end=new Date(2026,MON[m[1]],+m[2],23,59,59);return end<new Date();}
 function render(){
   list.innerHTML='';donelist.innerHTML='';let first=true,any=false;
-  POSTS.forEach(p=>{const c=cards[p.id],d=!!state[p.id];c.classList.toggle('done',d);c.querySelector('input').checked=d;
+  POSTS.forEach(p=>{const c=cards[p.id],d=(p.id in state)?!!state[p.id]:isPast(p);c.classList.toggle('done',d);c.querySelector('input').checked=d;
     c.querySelector('.next').hidden=!(first&&!d);
     if(d){donelist.appendChild(c);any=true}else{list.appendChild(c);first=false}});
   if(!list.children.length){const a=document.createElement('div');a.className='alldone';a.textContent="All caught up. Nothing left to post right now.";list.appendChild(a)}
