@@ -87,101 +87,38 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
 <script>
 const RAW='https://raw.githubusercontent.com/jaimtej/cco-social/main/';
 const POSTS=[
-{id:'tax',when:'Fri Oct 30 · 11:30 AM',type:'Carousel · 5 photos',title:'Property taxes jump after you buy',
- files:[1,2,3,4,5].map(n=>'posts/2026-10/tax-'+n+'.png'),
- tips:['Add the photos in order, 1 to 5','No music needed'],
- cap:`Bought a home this year? Your property tax bill might surprise you.
+{id:'alcazar',when:'Sun Nov 8 · 6:30 PM',type:'Reel · music included',title:'Just listed: 4051 Alcazar Ave, Granada',
+ files:['ready/alcazar/cco-alcazar-reel.mp4','ready/alcazar/cco-alcazar-reel-cover.jpg'],
+ tips:['Post this first. It goes ahead of everything else','Music is already on it, no need to add a song','Use the cover image','Turn on the AI label (the camera motion is AI, made from the listing photos)','Post to Facebook too, same caption'],
+ cap:`Just listed in Granada. ✨
 
-In Florida, the seller's taxes were capped. When a home sells, that cap resets and the home is reassessed at market value the next January 1. That's why your bill can be much higher than the seller's was.
+A fully reimagined, one-level home on Alcazar Avenue with 4 bedrooms, 3.5 baths and 3,582 square feet, built around a courtyard pool, cabana and outdoor kitchen.
 
-The fix: file for homestead as soon as you move in. It can take up to $50,000 off your taxable value and starts your own cap. The deadline is March 1.
+Private showings by appointment. Photos, the 3D tour and the floor plan: link in bio or ccoflorida.com/alcazar
 
-A News4JAX investigation found more than 24,000 Duval homeowners who qualify but never filed. Have you?
+📞 904-338-3182
+@carrie.heustis | Carrie & Co. | Keller Williams
 
-Save this, and send it to anyone who just bought.
+#JustListed #JacksonvilleRealEstate #SanMarco #Granada #JaxHomes #LuxuryRealEstate`},
+{id:'alcazarstory',when:'Sun Nov 8 · right after the Reel',type:'Story',title:'Share the Alcazar Reel to your Story',
+ files:['ready/alcazar/cco-alcazar-reel.mp4'],
+ tips:['Share the Reel to your Story','Add a link sticker to ccoflorida.com/alcazar that says "See every room"'],cap:''},
+{id:'fallmarket',when:'Mon Nov 9 · 9:00 AM',type:'Photo',title:"The market isn't stuck. Overpriced homes are.",
+ files:['posts/2026-11/fallmarket-v3.png'],
+ tips:["Single photo post", "No music needed"],
+ cap:`Is the Jacksonville market stuck? Not really. Overpriced homes are.
+
+In September, Duval's median sale price was $345,000, and homes took a median of 29 days to sell. Across Northeast Florida, homes sold in 36 days, faster than the 44 days a year ago.
+
+Yes, things slowed a little from summer. But homes that are priced right are still selling. The ones sitting for months are usually priced for 2021.
+
+Thinking about selling this fall? Price it right from day one, fix the small stuff, and let the first two weeks do the work.
 
 📞 904-309-9303
 @carrie.heustis | Carrie & Co. | Keller Williams
 
-#JacksonvilleRealEstate #HomesteadExemption #PropertyTaxes #DuvalCounty #FirstTimeHomeBuyer`},
-{id:'halloween',when:'Sat Oct 31 · 10:00 AM',type:'Story · 3 frames',title:'The scariest words in real estate',
- files:[1,2,3].map(n=>'stories/2026-10/halloween-story-'+n+'.png'),
- tips:['Post as Stories, in order 1, 2, 3','No caption. Music is optional'],cap:''},
-{id:'pay',when:'Sun Nov 1 · 7:00 PM',type:'Carousel · 5 photos',title:"Who's actually paying these prices?",
- files:[1,2,3,4,5].map(n=>'posts/2026-11/pay-'+n+'.png'),
- tips:['Add the photos in order, 1 to 5','If the Week One Offer Reel is not going up Monday, delete the "Tomorrow" line'],
- cap:`Who's actually paying these Jacksonville prices? Honestly? Often nobody.
-
-A lot of homes are still listed like it's 2021. Sellers remember those prices. Buyers are living with today's rates. So overpriced homes sit, and then they get reduced.
-
-Buying? Look at what homes actually sold for, not what they're listed for.
-Selling? The first two weeks matter most. Price it right on day one.
-
-Tomorrow we're sharing a real story about exactly this. 👀
-
-📞 904-309-9303
-@carrie.heustis | Carrie & Co. | Keller Williams
-
-#JacksonvilleRealEstate #JaxRealEstate #HousingMarket #HomeSellerTips #HomeBuyerTips`},
-{id:'week1',when:'Mon Nov 2 · 9:00 AM',type:'Reel',title:'Week One Offer: a seller story',
- files:['ready/week-one-offer/cco-week-one-offer-reel.mp4','ready/week-one-offer/cco-week-one-offer-cover.png'],
- tips:['Post as a Reel. Song idea: something calm and confident','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (the clips are AI made)'],
- cap:`Week one: an offer. Day 80: about the same price.
-
-This seller did a beautiful renovation. When you've put that much into a home, it's natural to want the price to reflect it. But buyers don't pay for what went into a home. They pay what the market says it's worth.
-
-A great home priced above the market doesn't get a premium. It just gets skipped.
-
-The market sets the price. Experience knows it on day one.
-
-Thinking about selling? Let's price it right the first time.
-📞 904-309-9303
-@carrie.heustis | Carrie & Co. | Keller Williams
-
-#JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #RealEstateAdvice`},
-{id:'acosta',when:'Thu Nov 5 · 8:35 AM',type:'Reel',title:'1140 Acosta St: new construction in Riverside',
- files:['ready/acosta/cco-acosta-reel.mp4','ready/acosta/cco-acosta-cover-carrie.png'],
- tips:['Post as a Reel. Song idea: something warm and acoustic','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (the clips are AI made)','Tag Palm and Pine Custom Homes'],
- cap:`New construction in Riverside almost never happens. 🌳
-
-1140 Acosta St is a brand-new home by Palm and Pine Custom Homes, on an oak-lined street minutes from Five Points.
-
-4 bedrooms, a bonus room, and an owner's suite on the main floor. Tall ceilings, a 32-ft back porch, and a 2-car garage. Estimated completion is Q2 2027.
-
-Homes like this in Riverside don't come along often. Request the plans and full specifications before it's gone.
-
-📞 904-309-9303
-@carrie.heustis | Carrie & Co. | Keller Williams
-
-#RiversideJax #JacksonvilleRealEstate #NewConstruction #HistoricRiverside #FivePoints #JaxHomes`},
-{id:'a3car',when:'Fri Nov 6 · 9:00 AM',type:'Carousel · 5 photos',title:"Amendment 3 passed: what changes at home",
- files:[1,2,3,4,5].map(n=>'posts/2026-11/amendment3-'+n+'.png'),
- tips:["Add the photos in order, 1 to 5", "No music needed"],
- cap:`Amendment 3 passed on Nov. 3. Here's what it means for Jacksonville homeowners.
-
-Starting Jan. 1, 2027, the homestead exemption on non-school property taxes goes up:
-• $150,000 in 2027
-• $250,000 in 2028, then adjusted for inflation
-
-School taxes keep the current exemption. Rentals and second homes get a lower cap on how fast their non-school assessed value can rise: 5% a year, down from 10%.
-
-A Jacksonville example: on a home assessed at $350,000, at 2025 tax rates, that's about $1,120 less a year in 2027 and about $2,260 in 2028. Your number depends on your assessed value and on the rates set next year.
-
-Duval voters also renewed the existing 1-mill school tax, so that part of your bill stays the same.
-
-Two things to do now: make sure your homestead exemption is on file (the deadline is March 1), and look up your record on the Duval County Property Appraiser's site.
-
-Save this and send it to a Jacksonville homeowner.
-
-📞 904-309-9303
-@carrie.heustis | Carrie & Co. | Keller Williams
-
-#JacksonvilleRealEstate #PropertyTaxes #HomesteadExemption #DuvalCounty #FloridaHomeowners`},
-{id:'a3story',when:'Fri Nov 6 · 12:00 PM',type:'Story · 1 frame',title:"Is your homestead filed?",
- files:['stories/2026-11/homestead-story.png'],
- tips:["Post as a Story after the carousel goes up", "Add a poll sticker: \"Yes / Not sure\"", "No caption"],
- cap:``},
-{id:'dec31',when:'Sun Nov 8 · 9:00 AM',type:'Photo',title:"Moving to Florida? December 31 matters.",
+#JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #HousingMarket`},
+{id:'dec31',when:'Tue Nov 10 · 9:00 AM',type:'Photo',title:"Moving to Florida? December 31 matters.",
  files:['posts/2026-11/moving-dec31.png'],
  tips:["Single photo post", "No music needed"],
  cap:`Moving to Florida? Under Amendment 3, December 31, 2026 matters.
@@ -200,21 +137,6 @@ Send this to someone thinking about a move.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #MovingToJacksonville #MovingToFlorida #PropertyTaxes #JacksonvilleFL #Relocation`},
-{id:'fallmarket',when:'Mon Nov 9 · 9:00 AM',type:'Photo',title:"The market isn't stuck. Overpriced homes are.",
- files:['posts/2026-11/fallmarket-v3.png'],
- tips:["Single photo post", "No music needed"],
- cap:`Is the Jacksonville market stuck? Not really. Overpriced homes are.
-
-In September, Duval's median sale price was $345,000, and homes took a median of 29 days to sell. Across Northeast Florida, homes sold in 36 days, faster than the 44 days a year ago.
-
-Yes, things slowed a little from summer. But homes that are priced right are still selling. The ones sitting for months are usually priced for 2021.
-
-Thinking about selling this fall? Price it right from day one, fix the small stuff, and let the first two weeks do the work.
-
-📞 904-309-9303
-@carrie.heustis | Carrie & Co. | Keller Williams
-
-#JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #HousingMarket`},
 {id:'goodplace',when:'Wed Nov 11 · 9:00 AM',type:'Reel',title:'Is Jacksonville a good place to live?',
  files:['ready/good-place/cco-jax-good-place-reel.mp4','ready/good-place/cco-jax-good-place-cover.png'],
  tips:['Post as a Reel. Song idea: something warm and upbeat, nothing loud','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (some clips are AI made)'],
