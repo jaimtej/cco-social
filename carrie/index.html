@@ -18,6 +18,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font
 .wrap{max-width:640px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right)) 64px max(16px,env(safe-area-inset-left))}
 header{padding-bottom:18px;border-bottom:1px solid var(--rule);margin-bottom:20px}
 .eyebrow{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.tabs{display:flex;gap:6px;margin:4px 0 12px}.tabs button{flex:1;font:inherit;font-size:14px;font-weight:500;letter-spacing:.04em;padding:10px 6px;border:1px solid var(--green);background:transparent;color:var(--green);cursor:pointer}.tabs button.on{background:var(--green);color:var(--cream)}
+.acct{margin:0 0 10px;font-size:14px;color:var(--muted)}
 h1{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.05;margin:6px 0 10px}
 .how{margin:0;padding-left:20px;color:var(--muted)}
 .how li{margin-bottom:4px}
@@ -62,12 +64,18 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
 <div class="wrap">
 <header>
   <div class="eyebrow">Carrie &amp; Co. | Keller Williams</div>
-  <h1>Your posting list</h1>
+  <h1>Posting list</h1>
+  <nav class="tabs" role="tablist">
+    <button type="button" data-ch="ig" class="on">Instagram</button>
+    <button type="button" data-ch="tt">TikTok</button>
+    <button type="button" data-ch="carrie">Carrie's page</button>
+  </nav>
+  <p class="acct" id="acct"></p>
   <ol class="how">
     <li>Tap <b>Save to Photos</b>, then choose "Save Images" or "Save Video."</li>
     <li>Tap <b>Copy caption</b>.</li>
-    <li>Post on @carrieandcojax at the suggested time. Pick any song you like.</li>
-    <li>Check <b>Posted / Scheduled</b> once it's live or scheduled in Instagram.</li>
+    <li>Post it at the suggested time (or schedule it in the app).</li>
+    <li>Check <b>Posted / Scheduled</b> once it's live or scheduled.</li>
   </ol>
 </header>
 <details class="music">
@@ -82,12 +90,241 @@ footer{color:var(--muted);font-size:13px;margin-top:24px}
   </ul>
 </details>
 <main><div id="list"></div><div id="donewrap" hidden><div class="donehead">Posted / Scheduled</div><div id="donelist"></div></div></main>
-<footer>Questions? Text Jaime. Posts move to Posted / Scheduled automatically after their day passes. Checkmarks are saved on this phone only.</footer>
+<footer>Facebook: when posting on Instagram, turn on "Share to Facebook" so it goes to the Page too. Questions? Text Jaime. Posts move to Posted / Scheduled automatically after their day passes. Checkmarks are saved on this phone only.</footer>
 </div>
 <script>
 const RAW='https://raw.githubusercontent.com/jaimtej/cco-social/main/';
 const POSTS=[
-{id:'alcazar',when:'Sun Nov 8 · 6:30 PM',type:'Reel · music included',title:'Just listed: 4051 Alcazar Ave, Granada',
+{ch:'ig',id:'ig-hgreel',when:'Tue Nov 24 · tonight',type:'Reel · music included',title:'The 2026 Jacksonville Holiday Guide (reel)',
+ files:['ready/holiday-guide/cco-holiday-guide-reel.mp4','ready/holiday-guide/cco-holiday-guide-cover-v2.jpg'],
+ tips:['Music is already on it, no need to add a song','Edit cover: pick cco-holiday-guide-cover-v2 from your camera roll','Tag @carrie.heustis and invite her as a collaborator','Also share to feed: on. AI label: off'],
+ cap:`Every light, parade and market worth it, neighborhood by neighborhood. ✨
+
+The 2026 Jacksonville Holiday Guide is here: 43 local picks across 6 areas, from Riverside and San Marco to the Beaches, St. Augustine and Amelia Island, with real dates and times.
+
+Tap the link in our bio, pick your part of town and we'll send your guide.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleFL #ThingsToDoInJacksonville #JacksonvilleEvents #JaxHolidays #HolidayGuide`},
+{ch:'ig',id:'ig-fallmkt',when:'Wed Nov 25 · 12:00 PM',type:'Photo',title:"The market isn't stuck. Overpriced homes are.",
+ files:['posts/2026-11/fallmarket-oct-cream.png'],
+ tips:['Single photo post','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`Is the Jacksonville market stuck? Not really. Overpriced homes are.
+
+In October, Duval's median single-family sale price was $337,000, and homes took a median of 31 days to sell. Across Northeast Florida, there are about 4.4 months of supply.
+
+Yes, things slowed a little from summer. But homes that are priced right are still selling. The ones sitting for months are usually priced for 2021.
+
+Thinking about selling this season? Price it right from day one, fix the small stuff, and let the first two weeks do the work.
+
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #HousingMarket`},
+{ch:'ig',id:'ig-thanks',when:'Thu Nov 26 · 12:00 PM',type:'Photo',title:'Happy Thanksgiving',
+ files:['posts/2026-11/thanksgiving-2026.png'],
+ tips:['Single photo post','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`Thankful for every home, and every one of you. 🍂
+
+To the families who trusted us this year, the friends who sent their friends, and everyone who calls Jacksonville home: happy Thanksgiving from all of us.
+
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#HappyThanksgiving #JacksonvilleFL #Thankful #JaxRealEstate`},
+{ch:'ig',id:'ig-lakeway',when:'Fri Nov 27 · 12:00 PM',type:'Reel · music included',title:'Come home to Eagle Harbor: 1556 Lakeway Dr',
+ files:['ready/lakeway/vids/cco-lakeway-vids-music.mp4','ready/lakeway/vids/cco-lakeway-vids-cover.png'],
+ tips:['Music is already on it','Edit cover: pick the cover image from your camera roll','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`Come home to Eagle Harbor. 🏡
+
+1556 Lakeway Drive, Fleming Island: 5 beds, 4 full baths and 2,890 sq ft on a quiet cul-de-sac with pond views. Four bedrooms are on the main level, with a loft-style fifth bedroom and full bath upstairs. Recent updates include a newer roof, flooring and refreshed baths. Eagle Harbor adds resort-style pools and a community dock on the river.
+
+Schedule your private tour: 📞 904-309-9303
+Listed by @carrie.heustis and Andrew Robbins | Carrie & Co. | Keller Williams
+
+#FlemingIsland #EagleHarbor #ClayCounty #JacksonvilleRealEstate #HomeForSale`},
+{ch:'ig',id:'ig-harts',when:'Sat Nov 28 · 9:00 AM',type:'Carousel · 6 photos',title:'Harts Ridge: new townhomes in the low $200s',
+ files:['ready/harts-ridge/hr-0-place.png','ready/harts-ridge/hr-1.png','ready/harts-ridge/hr-2.png','ready/harts-ridge/hr-3.png','ready/harts-ridge/hr-4.png','ready/harts-ridge/hr-5.png'],
+ tips:['Add the photos in order','Tag @carrie.heustis on slide 2 (her photo) and invite her as a collaborator'],
+ cap:`New townhomes in the low $200s, right here in Jacksonville. 🏡
+
+Harts Ridge by Breeze Homes is brand-new construction on the Northside, minutes from I-95, I-295 and the airport. Bright, open kitchens, stainless appliances, and never lived in.
+
+Want to see it in person? Let's go together.
+
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleFL #NewConstruction #Townhomes #FirstTimeHomeBuyer #JaxRealEstate #MovingToJacksonville`},
+{ch:'ig',id:'ig-weekone',when:'Mon Nov 30 · 12:00 PM',type:'Reel · music included',title:'Week one: an offer. Day 80: about the same price.',
+ files:['ready/week-one-offer/cco-week-one-offer-reel.mp4','ready/week-one-offer/cco-week-one-offer-cover.png'],
+ tips:['Music is already on it','Edit cover: pick the cover image from your camera roll','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`Week one: an offer. Day 80: about the same price.
+
+This seller did a beautiful renovation. When you've put that much into a home, it's natural to want the price to reflect it. But buyers don't pay for what went into a home. They pay what the market says it's worth.
+
+A great home priced above the market doesn't get a premium. It just gets skipped.
+
+The market sets the price. Experience knows it on day one.
+
+Thinking about selling? Let's price it right the first time.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #RealEstateAdvice`},
+{ch:'ig',id:'ig-flood',when:'Tue Dec 1 · 12:00 PM',type:'Photo',title:"What's the flood zone?",
+ files:['posts/2026-11/flood-cream.png'],
+ tips:['Single photo post','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`What's the flood zone? Check before you fall in love.
+
+Zones starting with A or V are high risk, and flood insurance is required with most mortgages. Zone X is lower risk. Search any address at msc.fema.gov, or use St. Johns County's Flood Zone Viewer. Duval's updated FEMA maps are still preliminary, so check both. Florida sellers must also disclose past flood damage and claims.
+
+Save this for your search.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#FloodZone #JacksonvilleRealEstate #HomeBuyingTips #FloridaHomes`},
+{ch:'ig',id:'ig-johnson',when:'Wed Dec 2 · 12:00 PM',type:'Reel · music included',title:'Johnson Commons by UF Jacksonville',
+ files:['ready/johnson-commons/cco-johnson-commons.mp4','ready/johnson-commons/cco-johnson-commons-cover-place.png'],
+ tips:['Music is already on it','Edit cover: pick the cover image from your camera roll','Tag @carrie.heustis and invite her as a collaborator','Check with Jaime that the $30K flex cash is still live before posting'],
+ cap:`Something new just opened in Downtown Jacksonville. 🎓
+
+UF Jacksonville officially opened its new graduate campus in LaVilla, focused on AI, cybersecurity, engineering and health sciences. It's a big step for Downtown.
+
+And just a few blocks away: Johnson Commons by Breeze Homes. Modern three-story townhomes in historic LaVilla, right by the Emerald Trail, Lift Ev'ry Voice and Sing Park, and the JTA transit hub.
+
+Select homes come with up to $30K in flex cash right now.
+
+Ready to see it for yourself? Let's schedule your tour.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#DowntownJax #LaVilla #UFJacksonville #JacksonvilleRealEstate #NewConstruction #Townhomes`},
+{ch:'ig',id:'ig-truecost',when:'Thu Dec 3 · 12:00 PM',type:'Carousel · 5 photos',title:'The price is just the start',
+ files:[1,2,3,4,5].map(n=>'posts/2026-11/truecost-'+n+'-v3.png'),
+ tips:['Add the photos in order, 1 to 5','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`The price is just the start. Here's the real monthly.
+
+Budget for property taxes (about 1.8% of taxable value in Duval), homeowners insurance (about $2,800 a year on average in Duval), flood insurance (about $835 a year on average in Duval), maintenance (1% to 4% of the home's value a year) and any HOA or CDD fees.
+
+Two homes at the same price can have very different monthly costs. Want the real number on a home you like? Give us a call.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#HomeBuyingTips #JacksonvilleRealEstate #FirstTimeHomeBuyer #FloridaHomes`},
+{ch:'ig',id:'ig-orlando',when:'Fri Dec 4 · 12:00 PM',type:'Reel · music included',title:'Orlando or Jacksonville?',
+ files:['ready/orlando-vs-jax/cco-orlando-vs-jax-music.mp4','ready/orlando-vs-jax/cco-orlando-vs-jax-cover-place.png'],
+ tips:['Music is already on it','Edit cover: pick the cover image from your camera roll','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`Orlando or Jacksonville? Here's how they stack up.
+
+Median prices in September 2026: $345,000 in Duval County (all sales), about $432,000 in the Orlando area and $692,000 in Miami-Dade (single-family). Average home insurance with wind coverage: $2,786 in Duval, $3,610 in Orange County and $5,975 in Miami-Dade.
+
+Orlando has the theme parks and about an hour's drive to the beach. Jacksonville has 22 miles of its own.
+
+Send this to someone moving to Florida.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#MovingToJacksonville #OrlandoVsJacksonville #MovingToFlorida #JacksonvilleRealEstate`},
+{ch:'ig',id:'ig-newresale',when:'Sat Dec 5 · 9:00 AM',type:'Carousel · 5 photos',title:'New build or resale?',
+ files:[1,2,3,4,5].map(n=>'posts/2026-11/newresale-'+n+'-v3.png'),
+ tips:['Add the photos in order, 1 to 5','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`New build or resale? The answer changed this year.
+
+In October, 65% of builders nationally were offering incentives and 43% were cutting prices. Resale sellers are offering concessions and rate buydowns too. New homes bring a builder warranty; resale homes bring established neighborhoods and mature trees.
+
+Compare the monthly payment, not just the price, and bring your own agent to the model home.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#NewConstruction #JacksonvilleRealEstate #HomeBuyingTips #FirstTimeHomeBuyer`},
+{ch:'ig',id:'ig-hgcarousel',when:'Mon Dec 7 · 12:00 PM',type:'Carousel · 8 photos',title:'The Holiday Guide: a few favorites from each area',
+ files:[1,2,3,4,5,6,7,8].map(n=>'ready/holiday-guide/carousel/hg-ig-'+n+'.png'),
+ tips:['Add the photos in order, 1 to 8','Tag @carrie.heustis on slide 1 and invite her as a collaborator'],
+ cap:`Every light, parade and market worth it, neighborhood by neighborhood. ✨
+
+The 2026 Jacksonville Holiday Guide: 43 local picks across 6 areas, with real dates and times. Swipe for a few favorites from each.
+
+Tap the link in our bio, pick your part of town and we'll send your guide.
+📞 904-309-9303
+@carrie.heustis | Carrie & Co. | Keller Williams
+
+#JacksonvilleFL #ThingsToDoInJacksonville #JaxHolidays #HolidayGuide`},
+{ch:'ig',id:'ig-down20',when:'Tue Dec 8 · 12:00 PM',type:'Carousel · 5 photos',title:'You may not need 20% down',
+ files:[1,2,3,4,5].map(n=>'posts/2026-11/firsttime-'+n+'-v3.png'),
+ tips:['Add the photos in order, 1 to 5','Tag @carrie.heustis and invite her as a collaborator'],
+ cap:`You may not need 20% down. Not even close.
+
+First-time buyer in Jacksonville? State and city programs can help with your down payment and closing costs: FL Assist (up to $10,000), Hometown Heroes (up to $35,000 for eligible workers), HFA Preferred PLUS (3% to 5% of the loan) and Jacksonville's H2H program (up to $25,000 when funded).
+
+Most require a 640 credit score, a homebuyer class and income limits, and funding goes fast.
+
+Save this, and ask @carrie.heustis which programs fit you.
+📞 904-309-9303
+Carrie & Co. | Keller Williams
+
+#FirstTimeHomeBuyer #DownPaymentAssistance #JacksonvilleRealEstate #FloridaHomes`},
+{ch:'tt',id:'tt-hg',when:'Tue Nov 24 · tonight',type:'Video · music included',title:'The 2026 Jacksonville Holiday Guide',
+ files:['ready/holiday-guide/cco-holiday-guide-reel.mp4','ready/holiday-guide/cco-holiday-guide-cover-v2.jpg'],
+ tips:['Title: The Jacksonville Holiday Guide','Music is already on it','Select cover: upload the cover image','Turn on "Disclose content" then "Your brand"'],
+ cap:`The 2026 Jacksonville Holiday Guide: 43 local picks across 6 areas, with real dates and times. Get yours at ccoflorida.com/holiday-guide 📞 904-309-9303 Carrie & Co. | Keller Williams #JacksonvilleFL #ThingsToDoInJacksonville #JaxHolidays`},
+{ch:'tt',id:'tt-lakeway',when:'Wed Nov 25 · 6:00 PM',type:'Video · music included',title:'Come home to Eagle Harbor',
+ files:['ready/lakeway/vids/cco-lakeway-vids-music.mp4'],
+ tips:['Title: Come home to Eagle Harbor','Music is already on it','Turn on "Disclose content" then "Your brand"'],
+ cap:`Come home to Eagle Harbor. 1556 Lakeway Dr, Fleming Island: 5 beds, 4 full baths, 2,890 sq ft on a quiet cul-de-sac with pond views, plus resort-style pools and a community dock on the river. Schedule your private tour: 📞 904-309-9303 Carrie & Co. | Keller Williams #FlemingIsland #EagleHarbor #ClayCounty #JacksonvilleRealEstate #HomeForSale`},
+{ch:'tt',id:'tt-thanks',when:'Thu Nov 26 · 12:00 PM',type:'Photo',title:'Happy Thanksgiving',
+ files:['tiktok/thanksgiving-1.jpg'],
+ tips:['Photo post. Add a soft instrumental sound in TikTok'],
+ cap:`Thankful for every home, and every one of you. 🍂 Happy Thanksgiving from all of us. Carrie & Co. | Keller Williams #HappyThanksgiving #JacksonvilleFL #Thankful`},
+{ch:'tt',id:'tt-nohoa',when:'Fri Nov 27 · 6:00 PM',type:'Video · music included',title:"A new home with no HOA? It's possible.",
+ files:['ready/no-hoa/cco-no-hoa-music.mp4'],
+ tips:["Title: A new home with no HOA? It's possible.",'Music is already on it'],
+ cap:`A new home with no HOA in Jacksonville? It's possible, but rare. Look at infill lots in established neighborhoods, building on your own lot, or resale homes in older neighborhoods. Save this for your search. 📞 904-309-9303 Carrie & Co. | Keller Williams #NewConstruction #NoHOA #JacksonvilleRealEstate #JacksonvilleFL #HomeBuyingTips`},
+{ch:'tt',id:'tt-pay',when:'Sat Nov 28 · 9:00 AM',type:'Photos · 5',title:"Who's actually paying these prices?",
+ files:[1,2,3,4,5].map(n=>'tiktok/pay-'+n+'.jpg'),
+ tips:["Title: Who's actually paying these prices?",'Add the photos in order, then pick a calm instrumental sound'],
+ cap:`Who's actually paying these Jacksonville prices? Honestly? Often nobody. Look at what homes sold for, not what they're listed for. Questions? 904-309-9303 | Carrie & Co. | Keller Williams #JacksonvilleRealEstate #HousingMarket #HomeSellerTips #HomeBuyerTips`},
+{ch:'tt',id:'tt-good',when:'Sun Nov 29 · 6:00 PM',type:'Video · music included',title:'Is Jacksonville a good place to live?',
+ files:['ready/good-place/cco-jax-good-place-music.mp4'],
+ tips:['Title: Is Jacksonville a good place to live?','Music is already on it'],
+ cap:`Is Jacksonville a good place to live? The honest answer: lower cost of living, no state income tax, 22 miles of beaches and 400+ city parks. The trade-offs: hot summers, lots of driving, and flood risk that varies by address. Ask us anything. 📞 904-309-9303 Carrie & Co. | Keller Williams #MovingToJacksonville #JacksonvilleFL #MovingToFlorida #JacksonvilleRealEstate`},
+{ch:'tt',id:'tt-down20',when:'Mon Nov 30 · 6:00 PM',type:'Photos · 5',title:'You may not need 20% down',
+ files:[1,2,3,4,5].map(n=>'tiktok/down20-'+n+'.jpg'),
+ tips:['Title: You may not need 20% down','Add the photos in order, then pick a calm instrumental sound'],
+ cap:`First-time buyer in Jacksonville? You may not need 20% down. FL Assist, Hometown Heroes, HFA Preferred PLUS and Jacksonville's H2H program can help with your down payment and closing costs. Ask us which ones fit you. 📞 904-309-9303 Carrie & Co. | Keller Williams #FirstTimeHomeBuyer #DownPaymentAssistance #JacksonvilleRealEstate #FloridaHomes`},
+{ch:'tt',id:'tt-orlando',when:'Tue Dec 1 · 6:00 PM',type:'Video · music included',title:'Orlando or Jacksonville?',
+ files:['ready/orlando-vs-jax/cco-orlando-vs-jax-music.mp4'],
+ tips:['Title: Orlando or Jacksonville?','Music is already on it'],
+ cap:`Orlando or Jacksonville? Median price in Duval was $345,000 in September vs. about $432,000 around Orlando, and home insurance runs about $2,786 a year in Duval vs. $3,610 in Orange County. Orlando has the theme parks. Jacksonville has 22 miles of beaches. 📞 904-309-9303 Carrie & Co. | Keller Williams #MovingToJacksonville #OrlandoVsJacksonville #MovingToFlorida #FloridaLiving`},
+{ch:'tt',id:'tt-truecost',when:'Wed Dec 2 · 6:00 PM',type:'Photos · 5',title:'The price is just the start',
+ files:[1,2,3,4,5].map(n=>'tiktok/truecost-'+n+'.jpg'),
+ tips:['Title: The price is just the start','Add the photos in order, then pick a calm instrumental sound'],
+ cap:`The price is just the start. In Duval, budget for property taxes, homeowners and flood insurance, maintenance and any HOA or CDD fees. Two homes at the same price can have very different monthly costs. 📞 904-309-9303 Carrie & Co. | Keller Williams #HomeBuyingTips #JacksonvilleRealEstate #FirstTimeHomeBuyer #FloridaHomes`},
+{ch:'tt',id:'tt-johnson',when:'Thu Dec 3 · 6:00 PM',type:'Video · music included',title:'New townhomes near UF Jacksonville',
+ files:['ready/johnson-commons/cco-johnson-commons.mp4'],
+ tips:['Title: New townhomes near UF Jacksonville','Music is already on it','Turn on "Disclose content" then "Your brand"','Check with Jaime that the $30K flex cash is still live'],
+ cap:`Something new just opened in Downtown Jacksonville: UF Jacksonville's graduate campus in LaVilla. A few blocks away, Johnson Commons by Breeze Homes has modern three-story townhomes by the Emerald Trail, and select homes come with up to $30K in flex cash right now. 📞 904-309-9303 Carrie & Co. | Keller Williams #DowntownJax #LaVilla #UFJacksonville #NewConstruction`},
+{ch:'tt',id:'tt-flood',when:'Fri Dec 4 · 6:00 PM',type:'Photo',title:'Check the flood zone first',
+ files:['tiktok/flood-1.jpg'],
+ tips:['Title: Check the flood zone first','Pick a calm instrumental sound'],
+ cap:`What's the flood zone? Check before you fall in love with a house. A or V zones are high risk; X is lower risk. Look up any address at msc.fema.gov. 📞 904-309-9303 Carrie & Co. | Keller Williams #FloodZone #JacksonvilleRealEstate #HomeBuyingTips #FloridaHomes`},
+{ch:'tt',id:'tt-am3',when:'Sat Dec 5 · 9:00 AM',type:'Photos · 5',title:'Amendment 3 passed',
+ files:[1,2,3,4,5].map(n=>'tiktok/amendment3-'+n+'.jpg'),
+ tips:['Title: Amendment 3 passed','Add the photos in order, then pick a calm instrumental sound'],
+ cap:`Amendment 3 passed. Here's what it means for your Jacksonville property taxes starting in 2027. Save this. Questions? 904-309-9303 | Carrie & Co. | Keller Williams #JacksonvilleRealEstate #PropertyTaxes #HomesteadExemption #DuvalCounty`},
+{ch:'tt',id:'tt-newresale',when:'Mon Dec 7 · 6:00 PM',type:'Photos · 5',title:'New build or resale?',
+ files:[1,2,3,4,5].map(n=>'posts/2026-11/newresale-'+n+'-v3.png'),
+ tips:['Title: New build or resale?','Add the photos in order, then pick a calm instrumental sound'],
+ cap:`New build or resale? Both are negotiable right now: builders are offering incentives and resale sellers are offering concessions too. Compare the monthly payment, not just the price, and bring your own agent to the model home. 📞 904-309-9303 Carrie & Co. | Keller Williams #NewConstruction #JacksonvilleRealEstate #HomeBuyingTips #FirstTimeHomeBuyer`},
+{ch:'tt',id:'tt-tax',when:'Wed Dec 9 · 6:00 PM',type:'Photos · 5',title:'Your property tax bill might jump',
+ files:[1,2,3,4,5].map(n=>'tiktok/tax-'+n+'.jpg'),
+ tips:['Title: Your property tax bill might jump','Add the photos in order, then pick a calm instrumental sound'],
+ cap:`Bought a home this year? Your property tax bill might surprise you. In Florida, the seller's capped taxes reset after a sale. File your homestead exemption by March 1. Questions? 904-309-9303 | Carrie & Co. | Keller Williams #JacksonvilleRealEstate #HomesteadExemption #PropertyTaxes #FirstTimeHomeBuyer`},
+{ch:'tt',id:'tt-where',when:'Sat Dec 12 · 9:00 AM',type:'Photos · 5',title:'Where should we live in Jacksonville?',
+ files:[1,2,3,4,5].map(n=>'tiktok/where-'+n+'.jpg'),
+ tips:['Title: Where should we live in Jacksonville?','Add the photos in order, then pick a calm instrumental sound'],
+ cap:`Moving to Jacksonville? Here's how to pick the right part of town. Questions? 904-309-9303 | Carrie & Co. | Keller Williams #MovingToJacksonville #JacksonvilleFL #JacksonvilleRealEstate #RelocatingToFlorida`},
+{ch:'carrie',id:'alcazar',when:'Sun Nov 8 · 6:30 PM',type:'Reel · music included',title:'Just listed: 4051 Alcazar Ave, Granada',
  files:['ready/alcazar/cco-alcazar-reel.mp4','ready/alcazar/cco-alcazar-reel-cover.jpg'],
  tips:['Post this first. It goes ahead of everything else','Music is already on it, no need to add a song','Use the cover image','Turn on the AI label (the camera motion is AI, made from the listing photos)','Post to Facebook too, same caption','Set your bio link to: https://www.ccoflorida.com/alcazar/inquire?utm_source=instagram&utm_medium=social&utm_campaign=alcazar_just_listed'],
  cap:`Just listed in Granada. ✨
@@ -100,10 +337,10 @@ Private showings by appointment. Request a showing, and see the photos, 3D tour 
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #JustListed #JacksonvilleRealEstate #SanMarco #Granada #JaxHomes #LuxuryRealEstate`},
-{id:'alcazarstory',when:'Sun Nov 8 · right after the Reel',type:'Story',title:'Share the Alcazar Reel to your Story',
+{ch:'carrie',id:'alcazarstory',when:'Sun Nov 8 · right after the Reel',type:'Story',title:'Share the Alcazar Reel to your Story',
  files:['ready/alcazar/cco-alcazar-reel.mp4'],
  tips:['Share the Reel to your Story','Add a link sticker that says "Request a showing" with this link: https://www.ccoflorida.com/alcazar/inquire?utm_source=instagram&utm_medium=social&utm_campaign=alcazar_just_listed'],cap:''},
-{id:'fallmarket',when:'Mon Nov 9 · 9:00 AM',type:'Photo',title:"The market isn't stuck. Overpriced homes are.",
+{ch:'carrie',id:'fallmarket',when:'Mon Nov 9 · 9:00 AM',type:'Photo',title:"The market isn't stuck. Overpriced homes are.",
  files:['posts/2026-11/fallmarket-v3.png'],
  tips:["Single photo post", "No music needed"],
  cap:`Is the Jacksonville market stuck? Not really. Overpriced homes are.
@@ -118,7 +355,7 @@ Thinking about selling this fall? Price it right from day one, fix the small stu
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #JacksonvilleRealEstate #SellingYourHome #HomeSellerTips #JaxRealEstate #HousingMarket`},
-{id:'dec31',when:'Tue Nov 10 · 9:00 AM',type:'Photo',title:"Moving to Florida? December 31 matters.",
+{ch:'carrie',id:'dec31',when:'Tue Nov 10 · 9:00 AM',type:'Photo',title:"Moving to Florida? December 31 matters.",
  files:['posts/2026-11/moving-dec31.png'],
  tips:["Single photo post", "No music needed"],
  cap:`Moving to Florida? Under Amendment 3, December 31, 2026 matters.
@@ -137,11 +374,11 @@ Send this to someone thinking about a move.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #MovingToJacksonville #MovingToFlorida #PropertyTaxes #JacksonvilleFL #Relocation`},
-{id:'goodplace',when:'Wed Nov 11 · 9:00 AM',type:'Reel',title:'Is Jacksonville a good place to live?',
+{ch:'carrie',id:'goodplace',when:'Wed Nov 11 · 9:00 AM',type:'Reel',title:'Is Jacksonville a good place to live?',
  files:['ready/good-place/cco-jax-good-place-reel.mp4','ready/good-place/cco-jax-good-place-cover.png'],
  tips:['Post as a Reel. Song idea: something warm and upbeat, nothing loud','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (some clips are AI made)'],
  cap:"Is Jacksonville a good place to live? Here's the honest answer.\n\nThe good: living costs run about 10% below the national average, Florida has no state income tax, the median home in Duval sold for $345,000 in September, and we have 22 miles of beaches.\n\nThe trade-offs: summers are hot, the city is huge (the largest in the lower 48 by total area), so you'll drive a lot, and flood risk depends on the street.\n\nFor a lot of families, the trade is worth it. We're happy to tell you which parts of town fit how you live.\n\nSend this to someone thinking about Florida.\n\n\ud83d\udcde 904-309-9303\n@carrie.heustis | Carrie & Co. | Keller Williams\n\n#MovingToJacksonville #JacksonvilleFL #MovingToFlorida #JaxRealEstate #LivingInJacksonville"},
-{id:'where',when:'Fri Nov 13 · 9:00 AM',type:'Carousel · 5 photos',title:"Where should we live? Duval vs. St. Johns",
+{ch:'carrie',id:'where',when:'Fri Nov 13 · 9:00 AM',type:'Carousel · 5 photos',title:"Where should we live? Duval vs. St. Johns",
  files:[1,2,3,4,5].map(n=>'posts/2026-11/where-'+n+'-v3.png'),
  tips:["Add the photos in order, 1 to 5", "No music needed"],
  cap:`"Where should we live?" is the question we hear most from people moving to Jacksonville.
@@ -158,7 +395,7 @@ Send this to whoever you're moving with.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #MovingToJacksonville #MovingToFlorida #StJohnsCounty #JacksonvilleFL #Nocatee`},
-{id:'alcazarfilm',when:'Wed Nov 18 · 6:30 PM',type:'Reel · music included · or Mon/Tue, see below',title:'The film: 4051 Alcazar Ave, Granada',
+{ch:'carrie',id:'alcazarfilm',when:'Wed Nov 18 · 6:30 PM',type:'Reel · music included · or Mon/Tue, see below',title:'The film: 4051 Alcazar Ave, Granada',
  files:['ready/alcazar/cco-alcazar-film-reel.mp4','ready/alcazar/cco-alcazar-film-reel-cover.jpg'],
  tips:['Best time: Wed Nov 18 at 6:30 PM (recommended)','Want it out sooner? Best Monday option: Mon Nov 16 at 2:30 PM. Best Tuesday option: Tue Nov 17 at 6:30 PM','Nothing else is scheduled Mon to Thu this week, so the Alcazar film has the spotlight','Music is already on it, no need to add a song','Use the cover image (you swimming, the pool from above)','No AI label: this is real footage','Post to Facebook too, same caption','Set your bio link to: https://www.ccoflorida.com/alcazar/inquire?utm_source=instagram&utm_medium=social&utm_campaign=alcazar_film','For the first hour, reply to every comment. Ask the team to like and comment early'],
  cap:`Worth the wait. ✨
@@ -170,21 +407,21 @@ Tap the link for the full film and to book a private showing.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #SanMarco #Granada #JacksonvilleRealEstate #LuxuryRealEstate #JaxHomes`},
-{id:'alcazarfilmstory',when:'Wed Nov 18 · right after the Reel',type:'Story',title:'Share the Alcazar film to your Story',
+{ch:'carrie',id:'alcazarfilmstory',when:'Wed Nov 18 · right after the Reel',type:'Story',title:'Share the Alcazar film to your Story',
  files:['ready/alcazar/cco-alcazar-film-reel.mp4'],
  tips:['Share the Reel to your Story','Add a link sticker that says "Request a showing" with this link: https://www.ccoflorida.com/alcazar/inquire?utm_source=instagram&utm_medium=social&utm_campaign=alcazar_film'],cap:''},
-{id:'alcazarfilmstory2',when:'Thu Nov 19 · 9:00 AM',type:'Story',title:'Repost the film to your Story',
+{ch:'carrie',id:'alcazarfilmstory2',when:'Thu Nov 19 · 9:00 AM',type:'Story',title:'Repost the film to your Story',
  files:['ready/alcazar/cco-alcazar-film-reel.mp4'],
  tips:['Repost the film Reel to your Story','Add text: "See it in person. Private showings by appointment."','Add the same "Request a showing" link sticker: https://www.ccoflorida.com/alcazar/inquire?utm_source=instagram&utm_medium=social&utm_campaign=alcazar_film'],cap:''},
-{id:'nohoa',when:'Fri Nov 20 · 12:00 PM',type:'Reel',title:'A new home with no HOA?',
+{ch:'carrie',id:'nohoa',when:'Fri Nov 20 · 12:00 PM',type:'Reel',title:'A new home with no HOA?',
  files:['ready/no-hoa/cco-no-hoa-reel.mp4','ready/no-hoa/cco-no-hoa-cover.png'],
  tips:['Post as a Reel. Song idea: something calm and modern, instrumental','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (the clips are AI made)'],
  cap:"Want a brand-new home with no HOA in Jacksonville? It's possible, but you have to know where to look.\n\nNationally, 65.7% of new single-family homes started in 2024 were in an HOA. Ponds, roads and common areas need someone to maintain them.\n\nWhere to look instead:\n\u2022 Infill lots: new homes on older streets, often with no HOA\n\u2022 Your own lot: build custom\n\u2022 Resale in older neighborhoods, where many homes have no HOA or CDD\n\nIf the home you love does have an HOA, read the rules first, and ask about any CDD fee, which shows up on your property tax bill.\n\n\ud83d\udcde 904-309-9303\n@carrie.heustis | Carrie & Co. | Keller Williams\n\n#NewConstruction #NoHOA #JacksonvilleRealEstate #JaxRealEstate #FloridaHomes"},
-{id:'orlando',when:'Tue Nov 24 · 1:00 PM',type:'Reel',title:'Orlando or Jacksonville?',
+{ch:'carrie',id:'orlando',when:'Tue Nov 24 · 1:00 PM',type:'Reel',title:'Orlando or Jacksonville?',
  files:['ready/orlando-vs-jax/cco-orlando-vs-jax-reel.mp4','ready/orlando-vs-jax/cco-orlando-vs-jax-cover.png'],
  tips:['Post as a Reel. Song idea: something light and upbeat, instrumental','Tap Edit cover, choose the cover photo from your camera roll','Turn on "AI info" (the beach clip is AI made)'],
  cap:"Orlando or Jacksonville? Here's how they stack up.\n\nMedian price in September:\n\u2022 Jacksonville (Duval, all sales): $345,000\n\u2022 Orlando area (single-family): $432,000\n\u2022 Miami-Dade (single-family): $692,000\n\nAverage home insurance with wind coverage:\n\u2022 Duval: $2,786\n\u2022 Orange County: $3,610\n\u2022 Miami-Dade: $5,975\n\nOrlando has the theme parks and about an hour's drive to the beach. Jacksonville has 22 miles of its own.\n\nMoving within Florida? Save this and send it to whoever you're moving with.\n\n\ud83d\udcde 904-309-9303\n@carrie.heustis | Carrie & Co. | Keller Williams\n\n#MovingToJacksonville #OrlandoFL #MovingToFlorida #JacksonvilleFL #FloridaRealEstate"},
-{id:'firsttime',when:'Tue Dec 1 · 1:00 PM',type:'Carousel · 5 photos',title:"You may not need 20% down",
+{ch:'carrie',id:'firsttime',when:'Tue Dec 1 · 1:00 PM',type:'Carousel · 5 photos',title:"You may not need 20% down",
  files:[1,2,3,4,5].map(n=>'posts/2026-11/firsttime-'+n+'-v3.png'),
  tips:["Add the photos in order, 1 to 5", "No music needed"],
  cap:`You may not need 20% down to buy your first home in Jacksonville. Not even close.
@@ -203,7 +440,7 @@ Save this, and send it to a friend who's renting.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #FirstTimeHomeBuyer #JacksonvilleRealEstate #DownPaymentAssistance #DuvalCounty #HometownHeroes`},
-{id:'truecost',when:'Wed Dec 2 · 12:30 PM',type:'Carousel · 5 photos',title:"The price is just the start",
+{ch:'carrie',id:'truecost',when:'Wed Dec 2 · 12:30 PM',type:'Carousel · 5 photos',title:"The price is just the start",
  files:[1,2,3,4,5].map(n=>'posts/2026-11/truecost-'+n+'-v3.png'),
  tips:["Add the photos in order, 1 to 5", "No music needed"],
  cap:`The price is just the start. Here's what owning a home in Jacksonville really costs.
@@ -222,7 +459,7 @@ Save this for your home search.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #JacksonvilleRealEstate #HomeBuyerTips #FirstTimeHomeBuyer #FloridaHomes #JaxRealEstate`},
-{id:'flood',when:'Thu Dec 3 · 12:30 PM',type:'Photo',title:"What's the flood zone?",
+{ch:'carrie',id:'flood',when:'Thu Dec 3 · 12:30 PM',type:'Photo',title:"What's the flood zone?",
  files:['posts/2026-11/flood-v3.png'],
  tips:["Single photo post", "No music needed"],
  cap:`Before you fall in love with a house, check the flood zone. It takes two minutes.
@@ -242,11 +479,11 @@ Save this for your home search.
 @carrie.heustis | Carrie & Co. | Keller Williams
 
 #JacksonvilleRealEstate #FloodZone #HomeBuyerTips #FloridaHomes #FirstTimeHomeBuyer`},
-{id:'floodstory',when:'Thu Dec 3 · 5:00 PM',type:'Story · 1 frame',title:"Do you know your flood zone?",
+{ch:'carrie',id:'floodstory',when:'Thu Dec 3 · 5:00 PM',type:'Story · 1 frame',title:"Do you know your flood zone?",
  files:['stories/2026-11/flood-story-v3.png'],
  tips:["Post as a Story after the flood post goes up", "Add a poll sticker: \"Yes / No idea\"", "No caption"],
  cap:``},
-{id:'newresale',when:'Tue Dec 8 · 1:00 PM',type:'Carousel · 5 photos',title:"New build or resale?",
+{ch:'carrie',id:'newresale',when:'Tue Dec 8 · 1:00 PM',type:'Carousel · 5 photos',title:"New build or resale?",
  files:[1,2,3,4,5].map(n=>'posts/2026-11/newresale-'+n+'-v3.png'),
  tips:["Add the photos in order, 1 to 5", "No music needed"],
  cap:`New build or resale? The answer changed this year.
@@ -290,7 +527,7 @@ POSTS.forEach(p=>{
   c.querySelector('.save').addEventListener('click',async e=>{
     const b=e.currentTarget; b.disabled=true; st.textContent='Getting files ready…';
     try{
-      const files=await Promise.all(p.files.map(async f=>{const r=await fetch(RAW+f);const bl=await r.blob();return new File([bl],name(f),{type:isVid(f)?'video/mp4':'image/png'})}));
+      const files=await Promise.all(p.files.map(async f=>{const r=await fetch(RAW+f);const bl=await r.blob();return new File([bl],name(f),{type:isVid(f)?'video/mp4':(/\.jpe?g$/i.test(f)?'image/jpeg':'image/png')})}));
       if(navigator.canShare&&navigator.canShare({files})){st.textContent='';await navigator.share({files});}
       else{files.forEach(fl=>{const a=document.createElement('a');a.href=URL.createObjectURL(fl);a.download=fl.name;document.body.appendChild(a);a.click();a.remove()});st.textContent='Downloaded. Check your Downloads folder.';}
     }catch(err){ if(err&&err.name==='AbortError'){st.textContent='';} else {st.textContent="That didn't work. Use the links below to open each file, then save it.";} }
@@ -308,9 +545,13 @@ POSTS.forEach(p=>{
 });
 const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
 function isPast(p){const m=/([A-Z][a-z]{2}) (\d{1,2})/.exec(p.when.replace(/^[A-Z][a-z]{2} /,''));if(!m||!(m[1] in MON))return false;const end=new Date(2026,MON[m[1]],+m[2],23,59,59);return end<new Date();}
+let CH=(()=>{try{return localStorage.getItem('cco-posting-ch')||'ig'}catch(e){return 'ig'}})();
+const ACCT={ig:'Team Instagram: @carrieandco_kw',tt:'TikTok: @CarrieandCo.KW',carrie:"Carrie's Instagram"};
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{CH=b.dataset.ch;try{localStorage.setItem('cco-posting-ch',CH)}catch(e){}render()}));
 function render(){
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.ch===CH));document.getElementById('acct').textContent=ACCT[CH];
   list.innerHTML='';donelist.innerHTML='';let first=true,any=false;
-  POSTS.forEach(p=>{const c=cards[p.id],d=(p.id in state)?!!state[p.id]:isPast(p);c.classList.toggle('done',d);c.querySelector('input').checked=d;
+  POSTS.filter(p=>p.ch===CH).forEach(p=>{const c=cards[p.id],d=(p.id in state)?!!state[p.id]:isPast(p);c.classList.toggle('done',d);c.querySelector('input').checked=d;
     c.querySelector('.next').hidden=!(first&&!d);
     if(d){donelist.appendChild(c);any=true}else{list.appendChild(c);first=false}});
   if(!list.children.length){const a=document.createElement('div');a.className='alldone';a.textContent="All caught up. Nothing left to post right now.";list.appendChild(a)}
